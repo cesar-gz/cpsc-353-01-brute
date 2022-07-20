@@ -87,10 +87,12 @@ int main(int argc, char const* argv[]) {
   std::vector<passwd> targets;
   // Search through `s` looking for matches with `passwd_regex`.
   while (regex_search(s, passwd_match, passswd_regex)) {
+    /* Professors loop, keep it for now
     cout << "searched and matched: " << passwd_match.str() << "\n";
     for (size_t i = 0; i < passwd_match.size(); i++) {
       cout << "\t" << i << ": " << passwd_match[i] << "\n";
     }
+    */
     // Create a passwd struct
     auto p = MakePasswd(passwd_match[1], passwd_match[2], passwd_match[3]);
     // Copy the passwd struct into a vector named `targets`
@@ -99,6 +101,43 @@ int main(int argc, char const* argv[]) {
   }
 
   // Here's a good spot to start brute forcing the passwords...
+  
+  string f = "/usr/share/dict/gaelic";
+  ifstream dictionary_file(f);
+  if (!dictionary_file.is_open()) {
+    cout << "Dictionary file " << f << " could not be opened.\n";
+    return 1;
+  }
+  
+  string buffer;
+  while(getline(dictionary_file, buffer)){
+    for(auto p : targets){
+      if(p.des_hash == string(crypt(buffer.c_str(), p.salt.c_str()))){
+        PrintPasswd(p);
+        cout << "Their password is " << buffer.c_str();
+        cout << "\n";
+        cout << "\n";
+      }
+    }
+  }
+
+  /*
+  mckuisk: foobar
+  mshafae: peach
+  jlawson: titans
+  lconway: vlsi
+
+  brazilian gave no pw
+  british gave no new pw
+  bulgarian gave no pw
+  canadian gave no new pw
+  catalan gave no new pw
+  esperanto gave no new pw
+  french gave no new pw
+  gaelic gave no new pw
+  */
+
+  //attack DES, try using hacking dictionaries. build a tool break DES
 
   return 0;
 }
