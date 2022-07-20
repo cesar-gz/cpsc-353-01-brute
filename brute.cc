@@ -102,7 +102,10 @@ int main(int argc, char const* argv[]) {
 
   // Here's a good spot to start brute forcing the passwords...
   
-  string f = "/usr/share/dict/gaelic";
+  //string f = "/usr/share/dict/polish";
+  //string f = "/home/vagrant/CPSC-353/cpsc-353-01-brute-cesar-gz/polish";
+  //string f = "/home/vagrant/CPSC-353/cpsc-353-01-brute-cesar-gz/american-english-insane";
+  //string f = "/home/vagrant/CPSC-353/cpsc-353-01-brute-cesar-gz/PasswordDictionary.txt";
   ifstream dictionary_file(f);
   if (!dictionary_file.is_open()) {
     cout << "Dictionary file " << f << " could not be opened.\n";
@@ -120,22 +123,6 @@ int main(int argc, char const* argv[]) {
       }
     }
   }
-
-  /*
-  mckuisk: foobar
-  mshafae: peach
-  jlawson: titans
-  lconway: vlsi
-
-  brazilian gave no pw
-  british gave no new pw
-  bulgarian gave no pw
-  canadian gave no new pw
-  catalan gave no new pw
-  esperanto gave no new pw
-  french gave no new pw
-  gaelic gave no new pw
-  */
 
   //attack DES, try using hacking dictionaries. build a tool break DES
 
