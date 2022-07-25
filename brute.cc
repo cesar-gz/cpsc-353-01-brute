@@ -1,3 +1,13 @@
+// Cesar Gutierrez
+// CPSC 353-02
+// 2022-07-24
+// cesarg7@csu.fullerton.edu
+// @cesar-gz
+//
+// Lab 01-00
+//
+// This is an exercise in practicing cracking passwords.
+//
 
 #include <chrono>
 #include <cstdlib>
@@ -87,12 +97,6 @@ int main(int argc, char const* argv[]) {
   std::vector<passwd> targets;
   // Search through `s` looking for matches with `passwd_regex`.
   while (regex_search(s, passwd_match, passswd_regex)) {
-    /* Professors loop, keep it for now
-    cout << "searched and matched: " << passwd_match.str() << "\n";
-    for (size_t i = 0; i < passwd_match.size(); i++) {
-      cout << "\t" << i << ": " << passwd_match[i] << "\n";
-    }
-    */
     // Create a passwd struct
     auto p = MakePasswd(passwd_match[1], passwd_match[2], passwd_match[3]);
     // Copy the passwd struct into a vector named `targets`
@@ -102,20 +106,24 @@ int main(int argc, char const* argv[]) {
 
   // Here's a good spot to start brute forcing the passwords...
   
-  //string f = "/usr/share/dict/polish";
-  //string f = "/home/vagrant/CPSC-353/cpsc-353-01-brute-cesar-gz/polish";
-  //string f = "/home/vagrant/CPSC-353/cpsc-353-01-brute-cesar-gz/american-english-insane";
-  //string f = "/home/vagrant/CPSC-353/cpsc-353-01-brute-cesar-gz/PasswordDictionary.txt";
+  string f =
+      "/home/vagrant/CPSC-353/cpsc-353-01-brute-cesar-gz/megaDictionary.txt";
   ifstream dictionary_file(f);
   if (!dictionary_file.is_open()) {
     cout << "Dictionary file " << f << " could not be opened.\n";
     return 1;
   }
   
+  cout << "I created and included a megaDictionary.txt in this repository.";
+  cout << "\n";
+  cout << "\n";
+  cout << "Trying that dictionary I made from a mix of three dictionaries...";
+  cout << "\n";
+  cout << "\n";
   string buffer;
-  while(getline(dictionary_file, buffer)){
-    for(auto p : targets){
-      if(p.des_hash == string(crypt(buffer.c_str(), p.salt.c_str()))){
+  while (getline(dictionary_file, buffer)) {
+    for (auto p : targets) {
+      if (p.des_hash == string(crypt(buffer.c_str(), p.salt.c_str()))) {
         PrintPasswd(p);
         cout << "Their password is " << buffer.c_str();
         cout << "\n";
@@ -123,8 +131,6 @@ int main(int argc, char const* argv[]) {
       }
     }
   }
-
-  //attack DES, try using hacking dictionaries. build a tool break DES
 
   return 0;
 }

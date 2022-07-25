@@ -114,5 +114,5 @@ tidy:
 headercheck:
 	for i in $(CXXFILES) $(HEADERS); do \
 		echo "Checking $$i header"; \
-		.action/headercheck.py $$i; \
+		.action/header_check.py $$i; \
 	done
