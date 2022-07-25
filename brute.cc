@@ -106,8 +106,7 @@ int main(int argc, char const* argv[]) {
 
   // Here's a good spot to start brute forcing the passwords...
   
-  string f =
-      "/home/vagrant/CPSC-353/cpsc-353-01-brute-cesar-gz/megaDictionary.txt";
+  string f = "megaDictionary.txt";
   ifstream dictionary_file(f);
   if (!dictionary_file.is_open()) {
     cout << "Dictionary file " << f << " could not be opened.\n";
